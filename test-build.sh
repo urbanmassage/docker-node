@@ -32,10 +32,10 @@ for version in "${versions[@]}"; do
 
     info "Building $version-$variant variant..."
     docker build -q -t urbanmassage/node:$version-$variant $version/$variant
-    docker tag urbanmassage/node:$version-$variant urbanmassage/node:$version-$MINOR_VERSION
+    docker tag urbanmassage/node:$version-$variant urbanmassage/node:$MINOR_VERSION-$variant
 
     if [ $MAJOR_VERSION != "0" ]; then
-      docker tag urbanmassage/node:$version-$variant urbanmassage/node:$version-$MAJOR_VERSION
+      docker tag urbanmassage/node:$version-$variant urbanmassage/node:$MAJOR_VERSION-$variant
     fi
 
     if [[ $? -gt 0 ]]; then
