@@ -11,7 +11,7 @@ RUN \
 
 # cleanup
 RUN \
-  rm -f /${CMD}-v${NODE_VERSION}-linux-x64/lib
+  rm -rf /${CMD}-v${NODE_VERSION}-linux-x64/lib
 
 ENV PATH /${CMD}-v${NODE_VERSION}-linux-x64/bin:$PATH
 
