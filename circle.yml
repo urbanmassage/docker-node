@@ -6,3 +6,9 @@ machine:
 test:
   override:
     - ./test-build.sh
+
+deployment:
+  hub:
+    branch: /.*/
+    commands:
+      - ./push.sh
