@@ -1,6 +1,6 @@
 FROM progrium/busybox
 
-ENV NODE_VERSION=0.10.44 ENV CMD=node DOMAIN=nodejs.org
+ENV NODE_VERSION=0.10.44 CMD=node DOMAIN=nodejs.org
 
 RUN \
   opkg-install curl bash git libstdcpp && \
