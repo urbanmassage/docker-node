@@ -31,7 +31,7 @@ for version in "${versions[@]}"; do
     continue
   fi
 
-  tag=$(cat $version/Dockerfile | grep "ENV NODE_VERSION" | cut -d' ' -f3)
+  tag=$(cat $version/Dockerfile | grep "ENV NODE_VERSION" | awk '{split($2,a,"=");print a[2]}')
 
   info "Pushing $tag..."
   docker push urbanmassage/node:$tag

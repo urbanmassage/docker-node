@@ -1,9 +1,7 @@
 FROM progrium/busybox
 
-ENV NODE_VERSION 0.10.44
+ENV NODE_VERSION=0.10.44 ENV CMD=node DOMAIN=nodejs.org
 
-# install nodejs and all deps
-ENV CMD=node DOMAIN=nodejs.org
 RUN \
   opkg-install curl bash git libstdcpp && \
   rm -f /lib/libpthread.so.0 && \

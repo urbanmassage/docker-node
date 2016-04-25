@@ -1,9 +1,7 @@
 FROM gliderlabs/alpine:3.2
 
-ENV NODE_VERSION 0.10.44
+ENV NODE_VERSION=0.10.44 CMD=node DOMAIN=nodejs.org CFLAGS="-D__USE_MISC"
 
-# install nodejs and all deps
-ENV CMD=node DOMAIN=nodejs.org CFLAGS="-D__USE_MISC"
 RUN apk-install openssl ca-certificates git curl make gcc g++ python linux-headers paxctl libgcc libstdc++ && \
   update-ca-certificates && \
   curl -sSL https://${DOMAIN}/dist/v${NODE_VERSION}/${CMD}-v${NODE_VERSION}.tar.gz | tar -xz && \
