@@ -36,7 +36,7 @@ for version in "${versions[@]}"; do
   variants=$(ls -d $version/*/ | awk -F"/" '{print $2}')
 
   for variant in $variants; do
-    info "Building $tag-$variant variant..."
+    info "Building $NODE_VERSION-$variant variant..."
     docker build -q -t urbanmassage/node:$NODE_VERSION-$variant $version/$variant
     docker tag urbanmassage/node:$NODE_VERSION-$variant urbanmassage/node:$NODE_VERSION-$MINOR_VERSION
 
@@ -45,13 +45,13 @@ for version in "${versions[@]}"; do
     fi
 
     if [[ $? -gt 0 ]]; then
-      fatal "Build of $tag-$variant failed!"
+      fatal "Build of $NODE_VERSION-$variant failed!"
     else
-      info "Build of $tag-$variant succeeded."
+      info "Build of $NODE_VERSION-$variant succeeded."
     fi
 
-    OUTPUT=$(docker run --rm -it urbanmassage/node:$tag-$variant node -e "process.stdout.write(process.versions.node)")
-    if [ "$OUTPUT" != "$tag" ]; then
+    OUTPUT=$(docker run --rm -it urbanmassage/node:$NODE_VERSION-$variant node -e "process.stdout.write(process.versions.node)")
+    if [ "$OUTPUT" != "$NODE_VERSION" ]; then
       fatal "Test of $tag-$variant failed!"
     else
       info "Test of $tag-$variant succeeded."
