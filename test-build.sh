@@ -31,21 +31,21 @@ for version in "${versions[@]}"; do
 
   tag=$(cat $version/Dockerfile | grep "ENV NODE_VERSION" | awk '{split($2,a,"=");print a[2]}')
 
-  info "Building $tag..."
-  docker build -q -t urbanmassage/node:$tag $version
-
-  if [[ $? -gt 0 ]]; then
-    fatal "Build of $tag failed!"
-  else
-    info "Build of $tag succeeded."
-  fi
-
-  OUTPUT=$(docker run --rm -it urbanmassage/node:$tag node -e "process.stdout.write(process.versions.node)")
-  if [ "$OUTPUT" != "$tag" ]; then
-    fatal "Test of $tag failed!"
-  else
-    info "Test of $tag succeeded."
-  fi
+  # info "Building $tag..."
+  # docker build -q -t urbanmassage/node:$tag $version
+  #
+  # if [[ $? -gt 0 ]]; then
+  #   fatal "Build of $tag failed!"
+  # else
+  #   info "Build of $tag succeeded."
+  # fi
+  #
+  # OUTPUT=$(docker run --rm -it urbanmassage/node:$tag node -e "process.stdout.write(process.versions.node)")
+  # if [ "$OUTPUT" != "$tag" ]; then
+  #   fatal "Test of $tag failed!"
+  # else
+  #   info "Test of $tag succeeded."
+  # fi
 
   variants=$(ls -d $version/*/ | awk -F"/" '{print $2}')
 
