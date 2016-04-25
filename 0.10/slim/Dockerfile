@@ -11,7 +11,6 @@ RUN \
   curl -s https://${DOMAIN}/dist/v${NODE_VERSION}/${CMD}-v${NODE_VERSION}.tar.gz | gunzip | tar -xf - -C /
 
 ENV PATH /${CMD}-v${NODE_VERSION}/bin:$PATH
-RUN npm install -g npm@2
 
 # define how to run the image
 CMD [ "node" ]
