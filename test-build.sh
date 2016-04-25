@@ -38,7 +38,7 @@ for version in "${versions[@]}"; do
       docker tag urbanmassage/node:$version-$variant urbanmassage/node:$MAJOR_VERSION-$variant
     fi
     
-    docker tag urbanmassage/node:$version-$variant urbanmassage/node:latest
+    docker tag -f urbanmassage/node:$version-$variant urbanmassage/node:latest
 
     if [[ $? -gt 0 ]]; then
       fatal "Build of $version-$variant failed!"
