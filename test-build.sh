@@ -29,7 +29,7 @@ for version in "${versions[@]}"; do
     continue
   fi
 
-  NODE_VERSION=$(cat $version/Dockerfile | grep "ENV NODE_VERSION" | awk '{split($2,a,"=");print a[2]')
+  NODE_VERSION=$(cat $version/Dockerfile | grep "ENV NODE_VERSION" | awk '{split($2,a,"=");print a[2]}')
   MINOR_VERSION=$(echo $NODE_VERSION | awk '{split($0,b,".");print b[1]"."b[2]}')
   MAJOR_VERSION=$(echo $MINOR_VERSION | awk '{split($0,b,".");print b[1]}')
 
