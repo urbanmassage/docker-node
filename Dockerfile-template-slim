@@ -13,7 +13,7 @@ RUN \
 RUN \
   rm -rf /${CMD}-v${NODE_VERSION}-linux-x64/lib && \
   rm /${CMD}-v${NODE_VERSION}-linux-x64/*.md && \
-  opkg-remove curl
+  rm ${CMD}-v${NODE_VERSION}-linux-x64.tar.gz
 
 ENV PATH /${CMD}-v${NODE_VERSION}-linux-x64/bin:$PATH
 
