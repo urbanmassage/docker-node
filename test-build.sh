@@ -46,9 +46,9 @@ for version in "${versions[@]}"; do
 
     OUTPUT=$(docker run --rm -it urbanmassage/node:$version-$variant node -e "process.stdout.write(process.versions.node)")
     if [ "$OUTPUT" != "$version" ]; then
-      fatal "Test of $tag-$variant failed!"
+      fatal "Test of $version-$variant failed!"
     else
-      info "Test of $tag-$variant succeeded."
+      info "Test of $version-$variant succeeded."
     fi
 
   done
