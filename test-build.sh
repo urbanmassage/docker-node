@@ -29,13 +29,20 @@ for version in "${versions[@]}"; do
     continue
   fi
 
-  tag=$(cat $version/Dockerfile | grep "ENV NODE_VERSION" | awk '{split($2,a,"=");print a[2]}')
+  NODE_VERSION=$(cat $version/Dockerfile | grep "ENV NODE_VERSION" | awk '{split($2,a,"=");print a[2]')
+  MINOR_VERSION=$(echo $NODE_VERSION | awk '{split($0,b,".");print b[1]"."b[2]}')
+  MAJOR_VERSION=$(echo $MINOR_VERSION | awk '{split($0,b,".");print b[1]}')
 
   variants=$(ls -d $version/*/ | awk -F"/" '{print $2}')
 
   for variant in $variants; do
     info "Building $tag-$variant variant..."
-    docker build -q -t urbanmassage/node:$tag-$variant $version/$variant
+    docker build -q -t urbanmassage/node:$NODE_VERSION-$variant $version/$variant
+    docker tag urbanmassage/node:$NODE_VERSION-$variant urbanmassage/node:$NODE_VERSION-$MINOR_VERSION
+
+    if [ $MAJOR_VERSION != "0" ]; then
+      docker tag urbanmassage/node:$NODE_VERSION-$variant urbanmassage/node:$NODE_VERSION-$MAJOR_VERSION
+    fi
 
     if [[ $? -gt 0 ]]; then
       fatal "Build of $tag-$variant failed!"
