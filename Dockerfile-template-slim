@@ -1,7 +1,6 @@
 FROM progrium/busybox
 
-# put all env on one line to reduce layers
-ENV NODE_VERSION=%%NODE_VERSION%% CMD=node DOMAIN=nodejs.org PATH=/${CMD}-v${NODE_VERSION}-linux-x64/bin:$PATH
+ENV NODE_VERSION=%%NODE_VERSION%% CMD=node DOMAIN=nodejs.org
 
 # pull down node and then cleanup
 RUN \
@@ -13,6 +12,8 @@ RUN \
   rm /${CMD}-v${NODE_VERSION}-linux-x64/*.md && \
   opkg-cl remove curl && \
   rm -rf /*.tar.gz /usr/share/man /tmp/* /var/cache
+
+ENV PATH /${CMD}-v${NODE_VERSION}-linux-x64/bin:$PATH
 
 # define how to run the image
 CMD [ "node" ]
