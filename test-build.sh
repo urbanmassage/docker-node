@@ -18,7 +18,7 @@ fatal() {
 
 cd $(cd ${0%/*} && pwd -P);
 
-versions=("0.10.44" "4.4.3" "5.11.0")
+versions=("0.10.44" "4.4.3" "5.11.0" "6.0.0")
 variants=("slim")
 
 for version in "${versions[@]}"; do
