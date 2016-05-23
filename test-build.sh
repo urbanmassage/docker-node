@@ -18,7 +18,12 @@ fatal() {
 
 cd $(cd ${0%/*} && pwd -P);
 
-versions=("0.10.44" "4.4.3" "5.11.0" "6.0.0")
+# https://nodejs.org/dist/latest-v0.10.x/
+# https://nodejs.org/dist/latest-v0.12.x/
+# https://nodejs.org/dist/latest-v4.x/
+# https://nodejs.org/dist/latest-v5.x/
+# https://nodejs.org/dist/latest-v6.x/
+versions=("0.10.45" "0.12.14" "4.4.4" "5.11.1" "6.2.0")
 variants=("slim")
 
 for version in "${versions[@]}"; do
