@@ -20,7 +20,7 @@ cd $(cd ${0%/*} && pwd -P);
 
 # https://nodejs.org/dist/latest-v4.x/
 # https://nodejs.org/dist/latest-v6.x/
-versions=("4.5.0" "6.6.0")
+versions=("4.6.0" "6.7.0")
 variants=("slim")
 
 for version in "${versions[@]}"; do
