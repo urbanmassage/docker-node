@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #
 # Run a test build for all images.
 
@@ -42,7 +42,7 @@ for version in "${versions[@]}"; do
       docker tag urbanmassage/node:$version-$variant urbanmassage/node:$MAJOR_VERSION-$variant
     fi
     
-    docker tag -f urbanmassage/node:$version-$variant urbanmassage/node:latest
+    docker tag urbanmassage/node:$version-$variant urbanmassage/node:latest
 
     if [[ $? -gt 0 ]]; then
       fatal "Build of $version-$variant failed!"
@@ -51,8 +51,8 @@ for version in "${versions[@]}"; do
     fi
 
     OUTPUT=$(docker run --rm -it urbanmassage/node:$version-$variant node -e "process.stdout.write(process.versions.node)")
-    if [ "$OUTPUT" != "$version" ]; then
-      fatal "Test of $version-$variant failed!"
+    if [[ $OUTPUT != *"$version"* ]]; then
+      fatal "Test of $version-$variant failed with output $OUTPUT"
     else
       info "Test of $version-$variant succeeded."
     fi
