@@ -1,0 +1,14 @@
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: circleci/buildpack-deps
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          name: "Test + Build"
+          command: ./test-build.sh
+      - run:
+          name: Push to registry
+          command: ./push.sh

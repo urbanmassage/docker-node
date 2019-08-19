@@ -1,10 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #
 # Push build docker images to dockerhub
 
 set -e
 
-docker login -e "$DOCKER_EMAIL" -u "$DOCKER_USER" -p "$DOCKER_PASS"
+docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
 
 echo "About to start push"
 docker push urbanmassage/node
