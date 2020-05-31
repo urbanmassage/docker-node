@@ -1,0 +1,30 @@
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: circleci/buildpack-deps
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          name: "Test + Build"
+          command: ./test-build.sh
+      - run:
+          name: Push to registry
+          command: ./push.sh
+
+workflows:
+  version: 2
+  commit-workflow:
+    jobs:
+      - build 
+  scheduled-workflow:
+    triggers:
+      - schedule:
+          cron: "5 8 * * 0"
+          filters:
+            branches:
+              only: master
+
+    jobs:
+      - build
