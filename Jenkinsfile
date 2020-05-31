@@ -8,7 +8,7 @@ pipeline {
     kubernetes {
       containerTemplate {
         name 'build'
-        image 'buildpack-deps'
+        image 'urbanmassage/urban-build:node-int-testing12-latest'
         ttyEnabled true
         alwaysPullImage true
         privileged true
@@ -40,6 +40,7 @@ pipeline {
         }
       }
     }
+  }
 
   post {
     success {
