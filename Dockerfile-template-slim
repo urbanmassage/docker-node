@@ -11,7 +11,9 @@ RUN \
   rm -rf /${CMD}-v${NODE_VERSION}-linux-x64/lib && \
   rm /${CMD}-v${NODE_VERSION}-linux-x64/*.md && \
   opkg-cl remove curl && \
-  rm -rf /*.tar.gz /usr/share/man /tmp/* /var/cache
+  rm -rf /*.tar.gz /usr/share/man /var/cache
+  # the skipped as it fails
+  # rm -rf /tmp/*
 
 ENV PATH /${CMD}-v${NODE_VERSION}-linux-x64/bin:$PATH
 

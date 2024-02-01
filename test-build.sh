@@ -22,7 +22,7 @@ cd $(cd ${0%/*} && pwd -P);
 # https://nodejs.org/dist/latest-v14.x/
 # https://nodejs.org/dist/latest-v16.x/
 info "++ Build Node.js 12 to 16"
-versions=("12.22.12" "14.19.1" "16.14.2")
+versions=("12.22.12" "14.21.3" "16.20.2")
 variants=("slim")
 
 for version in "${versions[@]}"; do
