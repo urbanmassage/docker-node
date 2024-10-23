@@ -64,7 +64,7 @@ done
 
 
 info "++ Build Node.js 18+"
-versions=("18.20.3" "20.15.0")
+versions=("18.20.4" "20.15.0" "22.10.0")
 variants=("alpine3.20")
 
 for version in "${versions[@]}"; do
