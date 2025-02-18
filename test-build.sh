@@ -23,44 +23,43 @@ cd $(cd ${0%/*} && pwd -P);
 # https://nodejs.org/dist/latest-v16.x/
 info "++ Build Node.js 12 to 16"
 # versions=("12.22.12" "14.21.3" "16.20.2")
-versions=("16.20.2")
-variants=("slim")
+# variants=("slim")
 
-for version in "${versions[@]}"; do
-  MINOR_VERSION=$(echo $version | awk '{split($0,b,".");print b[1]"."b[2]}')
-  MAJOR_VERSION=$(echo $MINOR_VERSION | awk '{split($0,b,".");print b[1]}')
+# for version in "${versions[@]}"; do
+#   MINOR_VERSION=$(echo $version | awk '{split($0,b,".");print b[1]"."b[2]}')
+#   MAJOR_VERSION=$(echo $MINOR_VERSION | awk '{split($0,b,".");print b[1]}')
 
-  for variant in $variants; do
-    mkdir -p $version/$variant
+#   for variant in $variants; do
+#     mkdir -p $version/$variant
 
-    cat Dockerfile-template-$variant | sed 's/%%NODE_VERSION%%/'$version'/' > $version/$variant/Dockerfile
+#     cat Dockerfile-template-$variant | sed 's/%%NODE_VERSION%%/'$version'/' > $version/$variant/Dockerfile
 
-    info "Building $version-$variant variant..."
-    docker build -q -t urbanmassage/node:$version-$variant $version/$variant
-    docker tag urbanmassage/node:$version-$variant urbanmassage/node:$MINOR_VERSION-$variant
+#     info "Building $version-$variant variant..."
+#     docker build -q -t urbanmassage/node:$version-$variant $version/$variant
+#     docker tag urbanmassage/node:$version-$variant urbanmassage/node:$MINOR_VERSION-$variant
 
-    if [ $MAJOR_VERSION != "0" ]; then
-      docker tag urbanmassage/node:$version-$variant urbanmassage/node:$MAJOR_VERSION-$variant
-    fi
+#     if [ $MAJOR_VERSION != "0" ]; then
+#       docker tag urbanmassage/node:$version-$variant urbanmassage/node:$MAJOR_VERSION-$variant
+#     fi
     
-    docker tag urbanmassage/node:$version-$variant urbanmassage/node:latest
+#     docker tag urbanmassage/node:$version-$variant urbanmassage/node:latest
 
-    if [[ $? -gt 0 ]]; then
-      fatal "Build of $version-$variant failed!"
-    else
-      info "Build of $version-$variant succeeded."
-    fi
+#     if [[ $? -gt 0 ]]; then
+#       fatal "Build of $version-$variant failed!"
+#     else
+#       info "Build of $version-$variant succeeded."
+#     fi
 
-    OUTPUT=$(docker run --rm -it urbanmassage/node:$version-$variant node -e "process.stdout.write(process.versions.node)")
-    if [[ $OUTPUT != *"$version"* ]]; then
-      fatal "Test of $version-$variant failed with output $OUTPUT"
-    else
-      info "Test of $version-$variant succeeded."
-    fi
+#     OUTPUT=$(docker run --rm -it urbanmassage/node:$version-$variant node -e "process.stdout.write(process.versions.node)")
+#     if [[ $OUTPUT != *"$version"* ]]; then
+#       fatal "Test of $version-$variant failed with output $OUTPUT"
+#     else
+#       info "Test of $version-$variant succeeded."
+#     fi
 
-  done
+#   done
 
-done
+# done
 
 
 
