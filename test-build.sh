@@ -64,8 +64,8 @@ info "++ Build Node.js 12 to 16"
 
 
 info "++ Build Node.js 18+"
-versions=("18.20.4" "20.15.0" "22.10.0")
-variants=("alpine3.20")
+versions=("18.20.6" "20.18.3" "22.14.0")
+variants=("alpine3.21")
 
 for version in "${versions[@]}"; do
   MINOR_VERSION=$(echo $version | awk '{split($0,b,".");print b[1]"."b[2]}')
